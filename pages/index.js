@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import Layout from '../components/layout'
 import Nav from '../components/nav'
 
 const Home = () => (
-  <div>
+  <Layout>
     <Head>
       <title>Home</title>
     </Head>
@@ -85,7 +86,7 @@ const Home = () => (
         color: #333;
       }
     `}</style>
-  </div>
+  </Layout>
 )
 
 export default Home
