@@ -14,14 +14,21 @@ const BlogList = ({ allBlogs }) => {
 
   return (
     <>
-      <ul className="list">
+      <center>
+         <h1>Blog Roll</h1>
+        </center>
+      <div className="row">
         {allBlogs.length > 1 && allBlogs.map(post => (
           <Link
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}
           >
-            <a>
-            <li>
+            <a className="card">
+                <h3>{post.document.data.title} &rarr;</h3>
+                <h5> {reformatDate(post.document.data.date)}</h5>
+                <p><ReactMarkdown source={truncateSummary(post.document.content)} /></p>
+                <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
+            {/* <li>
               <div className="hero_image">
                 <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
               </div>
@@ -32,11 +39,11 @@ const BlogList = ({ allBlogs }) => {
                   <ReactMarkdown source={truncateSummary(post.document.content)} />
                 </p>
               </div>
-            </li>
+            </li> */}
             </a>
           </Link>
         ))}
-      </ul>
+      </div>
       <style jsx>
         {`
           margin-bottom: 0;
@@ -93,6 +100,40 @@ const BlogList = ({ allBlogs }) => {
           }
           p {
             max-width: 900px;
+          }
+          .row {
+            max-width: 880px;
+            margin: 80px auto 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+          }
+          .card {
+            padding: 18px 18px 24px;
+            width: 220px;
+            text-align: left;
+            text-decoration: none;
+            color: #434343;
+            border: 1px solid #9b9b9b;
+            overflow: hidden;
+          }
+          .card img {
+            width: 100%;
+          }
+          .card:hover {
+            border-color: #067df7;
+            box-shadow: 2px 2px 2px grey;
+          }
+          .card h3 {
+            margin: 0;
+            color: #067df7;
+            font-size: 18px;
+          }
+          .card p {
+            margin: 0;
+            padding: 12px 0 0;
+            font-size: 13px;
+            color: #333;
           }
           @media (min-width: 768px) {
             li {

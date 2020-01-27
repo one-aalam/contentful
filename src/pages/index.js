@@ -28,11 +28,8 @@ const Home = ({ allBlogs }) =>  (
     <Nav />
     <div className='hero'>
       <h1 className='title'>Welcome to Contentful</h1>
-      <p className='description'>
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
 
-      <div className='row'>
+      {/* <div className='row'>
         <Link href='https://github.com/zeit/next.js#getting-started'>
             <a className='card'  onClick={cardClick}>
               <h3>Getting Started &rarr;</h3>
@@ -51,7 +48,7 @@ const Home = ({ allBlogs }) =>  (
             <p>Was this tool helpful? Let us know how we can improve it!</p>
           </a>
         </Link>
-      </div>
+      </div> */}
 
       <BlogList allBlogs={allBlogs}/>
     </div>
