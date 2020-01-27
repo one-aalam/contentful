@@ -111,13 +111,15 @@ const BlogList = ({ allBlogs }) => {
             color: #434343;
             border: 1px solid #9b9b9b;
             overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all .3s;
           }
           .card img {
             width: 100%;
           }
           .card:hover {
             border-color: #067df7;
-            box-shadow: 2px 2px 2px grey;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
           }
           .card h3 {
             margin: 0;

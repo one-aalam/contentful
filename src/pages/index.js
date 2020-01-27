@@ -125,7 +125,7 @@ Home.getInitialProps = async () => {
    });
    return data;
  })(require.context("../posts", true, /\.md$/));
-console.log(`fetched:`, posts);
+
  return {
    allBlogs: posts,
    ...siteConfig,
