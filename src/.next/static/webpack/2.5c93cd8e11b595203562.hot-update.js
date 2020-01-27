@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+webpackHotUpdate(2,{
 
 /***/ "./posts/bali.md":
 /*!***********************!*\
@@ -13,5 +13,5 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-}]);
-//# sourceMappingURL=2.js.map
+})
+//# sourceMappingURL=2.5c93cd8e11b595203562.hot-update.js.map

@@ -1,5 +1,4 @@
-exports.ids = [2];
-exports.modules = {
+webpackHotUpdate("static/development/pages/index.js",{
 
 /***/ "./posts/mara.md":
 /*!***********************!*\
@@ -14,5 +13,5 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-};;
-//# sourceMappingURL=2.js.map
+})
+//# sourceMappingURL=index.js.26a9cfbb578bcd25b532.hot-update.js.map
