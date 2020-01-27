@@ -7,6 +7,7 @@ export default function Meta(props) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta charSet="utf-8" />
                 <title>{props.siteTitle}</title>
+                <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css"></link>
                 <meta name="Description" content={props.description}></meta>
             </Head>
             <style jsx global>

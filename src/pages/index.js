@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '../components/layout'
 import Nav from '../components/nav'
+import Meta from '../components/Meta';
 import { logEvent } from '../utils/analytics';
 import matter from 'gray-matter'
 import BlogList from '../components/BlogList';
@@ -21,10 +22,10 @@ const cardClick = () => {
 
 const Home = ({ allBlogs }) =>  (
   <Layout>
-    <Head>
+    {/* <Head>
       <title>Home</title>
-    </Head>
-
+    </Head> */}
+    <Meta siteTitle={'Contentful -- Homepage'} description={'Yur at the HomePage of Contentful'}/>
     <Nav />
     <div className='hero'>
       <h1 className='title'>Welcome to Contentful</h1>
