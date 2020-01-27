@@ -24,7 +24,7 @@ const BlogList = ({ allBlogs }) => {
       <center>
          <h1>Blog Roll</h1>
         </center>
-      <div className="row">
+      <div className="">
         {allBlogs.length > 1 && allBlogs.map(post => (
           <Link
             key={post.slug}
@@ -117,9 +117,9 @@ const BlogList = ({ allBlogs }) => {
             grid-template-columns: 1fr 1fr 1fr;
           }
           .card {
-            width: 300px;
+            // width: 300px;
             padding: 10px 10px 16px;
-            border: 1px solid #9b9b9b;
+            // border: 1px solid #9b9b9b;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all .3s;
