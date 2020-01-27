@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '../components/layout'
 import Nav from '../components/nav'
 import { logEvent } from '../utils/analytics';
 
+const client = require('contentful').createClient({
+  space: process.env.SPACE_ID,
+  accessToken: process.env.ACCESS_TOKEN
+})
+
 const cardClick = () => {
   logEvent('Article', 'viewed', 'Campaign 1')
 }
 
-const Home = () => (
+const Home = () => {
+  async function fetchEntries() {
+    const entries = await client.getEntries()
+    if (entries.items) return entries.items
+    console.log(`Error getting Entries for ${contentType.name}.`)
+  }
+
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    async function getPosts() {
+      const allPosts = await fetchEntries()
+      setPosts([...allPosts])
+    }
+    getPosts()
+  }, [])
+
+
+  return (
   <Layout>
     <Head>
       <title>Home</title>
@@ -93,5 +116,7 @@ const Home = () => (
     `}</style>
   </Layout>
 )
+
+}
 
 export default Home
