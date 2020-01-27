@@ -4,24 +4,28 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import Nav from '../components/nav'
 import { logEvent } from '../utils/analytics';
+import matter from 'gray-matter'
+import BlogList from '../components/BlogList';
 
-const client = require('contentful').createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
-})
+let client;
+if (typeof window === undefined) {
+  client = require('contentful').createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+  })
+}
 
 const cardClick = () => {
   logEvent('Article', 'viewed', 'Campaign 1')
 }
 
-const Home = () =>  (
+const Home = ({ allBlogs }) =>  (
   <Layout>
     <Head>
       <title>Home</title>
     </Head>
 
     <Nav />
-
     <div className='hero'>
       <h1 className='title'>Welcome to Contentful</h1>
       <p className='description'>
@@ -48,6 +52,8 @@ const Home = () =>  (
           </a>
         </Link>
       </div>
+
+      <BlogList allBlogs={allBlogs}/>
     </div>
 
     <style jsx>{`
@@ -100,13 +106,33 @@ const Home = () =>  (
 )
 
 Home.getInitialProps = async () => {
-  const entries = await client.getEntries({
-    content_type: 'course'
-  })
-  console.log(`Error getting Entries for.`, entries);
-  return {
-    allCourses: entries.items
-  }
+  const siteConfig = await import(`../data/config.json`)
+  //get posts & context from folder
+  const posts = (context => {
+   const keys = context.keys();
+   const values = keys.map(context);
+   const data = keys.map((key, index) => {
+     // Create slug from filename
+     const slug = key
+       .replace(/^.*[\\\/]/, "")
+       .split(".")
+       .slice(0, -1)
+       .join(".");
+     const value = values[index];
+     // Parse yaml metadata & markdownbody in document
+     const document = matter(value.default);
+     return {
+       document,
+       slug
+     };
+   });
+   return data;
+ })(require.context("../posts", true, /\.md$/));
+console.log(`fetched:`, posts);
+ return {
+   allBlogs: posts,
+   ...siteConfig,
+ }
 }
 
 export default Home
