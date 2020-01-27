@@ -30,11 +30,25 @@ const BlogList = ({ allBlogs }) => {
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}
           >
-            <a className="card" onClick={cardClick}>
-                <h3>{post.document.data.title} &rarr;</h3>
-                <h5> {reformatDate(post.document.data.date)}</h5>
-                <div><ReactMarkdown source={truncateSummary(post.document.content)} /></div>
-                <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
+            <a className="" onClick={cardClick}>
+                <article className="card br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center">
+                    <img src={post.document.data.hero_image} alt={post.document.data.hero_image} className="db w-100 br2 br--top" />
+                    <div className="pa2 ph3-ns pb3-ns">
+                        <div className="dt w-100 mt1">
+                            <div className="dtc">
+                                <h1 className="f5 f4-ns mv0">{post.document.data.title} &rarr;</h1>
+                            </div>
+                        </div>
+                        <div className="dt w-100 mt1">
+                            <div className="dtc">
+                                <h2 className="f5 mv0">{reformatDate(post.document.data.date)}</h2>
+                            </div>
+                        </div>
+                        <div className="f6 lh-copy measure mt2 mid-gray">
+                            <ReactMarkdown source={truncateSummary(post.document.content)} />
+                        </div>
+                    </div>
+                </article>
             </a>
           </Link>
         ))}
@@ -99,16 +113,12 @@ const BlogList = ({ allBlogs }) => {
           .row {
             max-width: 880px;
             margin: 80px auto 40px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
           }
           .card {
-            padding: 18px 18px 24px;
-            width: 220px;
-            text-align: left;
-            text-decoration: none;
-            color: #434343;
+            width: 300px;
+            padding: 10px 10px 16px;
             border: 1px solid #9b9b9b;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -121,17 +131,17 @@ const BlogList = ({ allBlogs }) => {
             border-color: #067df7;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
           }
-          .card h3 {
-            margin: 0;
-            color: #067df7;
-            font-size: 18px;
-          }
-          .card p {
-            margin: 0;
-            padding: 12px 0 0;
-            font-size: 13px;
-            color: #333;
-          }
+        //   .card h3 {
+        //     margin: 0;
+        //     color: #067df7;
+        //     font-size: 18px;
+        //   }
+        //   .card p {
+        //     margin: 0;
+        //     padding: 12px 0 0;
+        //     font-size: 13px;
+        //     color: #333;
+        //   }
           @media (min-width: 768px) {
             li {
               min-height: 250px;

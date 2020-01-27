@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 
 import Layout from '../../components/layout'
+import Nav from '../../components/nav'
+import Meta from '../../components/Meta';
 import { logEvent } from '../../utils/analytics';
 
 const blogClick = () => {
@@ -20,6 +22,8 @@ export default function BlogTemplate(props) {
 
   return (
     <Layout siteTitle={props.siteTitle}>
+      <Meta siteTitle={'Contentful -- Blog'} description={'Yur at the Blog of Contentful'}/>
+      <Nav />
     <article className="blog" onClick={blogClick}>
         <figure className="blog__hero">
         <img

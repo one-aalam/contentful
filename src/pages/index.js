@@ -22,13 +22,10 @@ const cardClick = () => {
 
 const Home = ({ allBlogs }) =>  (
   <Layout>
-    {/* <Head>
-      <title>Home</title>
-    </Head> */}
     <Meta siteTitle={'Contentful -- Homepage'} description={'Yur at the HomePage of Contentful'}/>
     <Nav />
     <div className='hero'>
-      <h1 className='title'>Welcome to Contentful</h1>
+      <h1 className='title f1 w-100 dark-pink'>Welcome to Contentful</h1>
 
       {/* <div className='row'>
         <Link href='https://github.com/zeit/next.js#getting-started'>
@@ -64,12 +61,14 @@ const Home = ({ allBlogs }) =>  (
         width: 100%;
         padding-top: 80px;
         line-height: 1.15;
-        font-size: 48px;
       }
       .title,
       .description {
         text-align: center;
       }
+
+
+
       .row {
         max-width: 880px;
         margin: 80px auto 40px;
