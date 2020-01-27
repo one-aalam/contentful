@@ -14,25 +14,7 @@ const cardClick = () => {
   logEvent('Article', 'viewed', 'Campaign 1')
 }
 
-const Home = () => {
-  async function fetchEntries() {
-    const entries = await client.getEntries()
-    if (entries.items) return entries.items
-    console.log(`Error getting Entries for ${contentType.name}.`)
-  }
-
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    async function getPosts() {
-      const allPosts = await fetchEntries()
-      setPosts([...allPosts])
-    }
-    getPosts()
-  }, [])
-
-
-  return (
+const Home = () =>  (
   <Layout>
     <Head>
       <title>Home</title>
@@ -117,6 +99,14 @@ const Home = () => {
   </Layout>
 )
 
+Home.getInitialProps = async () => {
+  const entries = await client.getEntries({
+    content_type: 'course'
+  })
+  console.log(`Error getting Entries for.`, entries);
+  return {
+    allCourses: entries.items
+  }
 }
 
 export default Home
