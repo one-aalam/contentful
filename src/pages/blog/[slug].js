@@ -3,6 +3,12 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 
 import Layout from '../../components/layout'
+import { logEvent } from '../../utils/analytics';
+
+const blogClick = () => {
+  console.log('logging', 'Blog', 'clicked', 'HomePage');
+  logEvent('Blog', 'clicked', 'Homepage')
+}
 
 export default function BlogTemplate(props) {
   function reformatDate(fullDate) {
@@ -14,7 +20,7 @@ export default function BlogTemplate(props) {
 
   return (
     <Layout siteTitle={props.siteTitle}>
-    <article className="blog">
+    <article className="blog" onClick={blogClick}>
         <figure className="blog__hero">
         <img
             src={frontmatter.hero_image}

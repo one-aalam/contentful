@@ -4,6 +4,7 @@ import { logEvent } from '../utils/analytics';
 
 
 const cardClick = () => {
+    console.log('logging', 'Blog', 'viewed', 'HomePage');
     logEvent('Blog', 'viewed', 'Homepage')
 }
 
@@ -32,20 +33,8 @@ const BlogList = ({ allBlogs }) => {
             <a className="card" onClick={cardClick}>
                 <h3>{post.document.data.title} &rarr;</h3>
                 <h5> {reformatDate(post.document.data.date)}</h5>
-                <p><ReactMarkdown source={truncateSummary(post.document.content)} /></p>
+                <div><ReactMarkdown source={truncateSummary(post.document.content)} /></div>
                 <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
-            {/* <li>
-              <div className="hero_image">
-                <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
-              </div>
-              <div className="blog__info">
-                <h2>{post.document.data.title}</h2>
-                <h3> {reformatDate(post.document.data.date)}</h3>
-                <p>
-                  <ReactMarkdown source={truncateSummary(post.document.content)} />
-                </p>
-              </div>
-            </li> */}
             </a>
           </Link>
         ))}
@@ -175,3 +164,17 @@ const BlogList = ({ allBlogs }) => {
 };
 
 export default BlogList;
+
+
+            {/* <li>
+              <div className="hero_image">
+                <img src={post.document.data.hero_image} alt={post.document.data.hero_image} />
+              </div>
+              <div className="blog__info">
+                <h2>{post.document.data.title}</h2>
+                <h3> {reformatDate(post.document.data.date)}</h3>
+                <p>
+                  <ReactMarkdown source={truncateSummary(post.document.content)} />
+                </p>
+              </div>
+            </li> */}
