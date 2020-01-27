@@ -1,6 +1,11 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
+
+const cardClick = () => {
+    logEvent('Blog', 'viewed', 'Homepage')
+}
+
 const BlogList = ({ allBlogs }) => {
 
   function truncateSummary(content) {
@@ -23,7 +28,7 @@ const BlogList = ({ allBlogs }) => {
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}
           >
-            <a className="card">
+            <a className="card" onClick={cardClick}>
                 <h3>{post.document.data.title} &rarr;</h3>
                 <h5> {reformatDate(post.document.data.date)}</h5>
                 <p><ReactMarkdown source={truncateSummary(post.document.content)} /></p>
