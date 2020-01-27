@@ -3,6 +3,11 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '../components/layout'
 import Nav from '../components/nav'
+import { logEvent } from '../utils/analytics';
+
+const cardClick = () => {
+  logEvent('Article', 'viewed', 'Campaign 1')
+}
 
 const Home = () => (
   <Layout>
@@ -20,10 +25,10 @@ const Home = () => (
 
       <div className='row'>
         <Link href='https://github.com/zeit/next.js#getting-started'>
-          <a className='card'>
-            <h3>Getting Started &rarr;</h3>
-            <p>Learn more about Next.js on GitHub and in their examples</p>
-          </a>
+            <a className='card'  onClick={cardClick}>
+              <h3>Getting Started &rarr;</h3>
+              <p>Learn more about Next.js on GitHub and in their examples</p>
+            </a>
         </Link>
         <Link href='https://github.com/zeit/next.js/tree/master/examples'>
           <a className='card'>
