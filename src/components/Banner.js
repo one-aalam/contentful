@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import ReactMarkdown from "react-markdown";
+import { logEvent } from '../utils/analytics';
 
 const signupViewed = () => {
     logEvent('Signup', 'opened', 'Banner')

@@ -40,7 +40,7 @@ const Home = ({ allBlogs, allCampaigns }) =>  (
           <marquee>{allBlogs.map(post => (
             <Link
               key={post.slug}
-              href={{ pathname: `/blog/${post.slug}` }}
+              href={{ pathname: `/news/${post.slug}` }}
             >
               <a className="" onClick={newsreelLinkClicked}><span className="f5 f4-ns mv0">{post.document.data.title} &rarr;&nbsp;&nbsp;</span></a></Link>))}
           </marquee>
@@ -77,7 +77,7 @@ const Home = ({ allBlogs, allCampaigns }) =>  (
                       allBlogs.map(post => (
                         <Link
                           key={post.slug}
-                          href={{ pathname: `/blog/${post.slug}` }}
+                          href={{ pathname: `/media/${post.slug}` }}
                         >
                         <a className="" onClick={mediaCardClicked}>
                           <MediaCard post={post} />
@@ -95,7 +95,7 @@ const Home = ({ allBlogs, allCampaigns }) =>  (
                       allBlogs.map(post => (
                         <Link
                           key={post.slug}
-                          href={{ pathname: `/blog/${post.slug}` }}
+                          href={{ pathname: `/promo/${post.slug}` }}
                         >
                         <a className="" onClick={promoCardClicked}>
                           <PromoCard post={post}/>
@@ -263,8 +263,6 @@ Home.getInitialProps = async () => {
   });
   return data;
 })(require.context("../campaigns", true, /\.md$/));
-
-console.log(campaigns);
 
  return {
    allBlogs: posts,

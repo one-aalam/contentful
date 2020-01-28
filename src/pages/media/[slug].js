@@ -5,11 +5,11 @@ import ReactMarkdown from "react-markdown";
 import Layout from '../../components/layout'
 import { logEvent } from '../../utils/analytics';
 
-const campaignClick = () => {
-  logEvent('Campaign', 'clicked', 'CampaignDetailPage')
+const mediaClick = () => {
+  logEvent('Campaign', 'clicked', 'MediaDetailPage')
 }
 
-export default function BlogTemplate(props) {
+export default function MediaTemplate(props) {
   function reformatDate(fullDate) {
     const date = new Date(fullDate)
     return date.toDateString().slice(4);
@@ -19,7 +19,7 @@ export default function BlogTemplate(props) {
 
   return (
     <Layout siteTitle={props.data.title} description={'Yur at the Blog of Contentful'}>
-    <article onClick={campaignClick}>
+    <article onClick={mediaClick}>
       <header className="bg-gold sans-serif">
         <div className="mw9 center pa4 pt5-ns ph7-l">
           <time className="f6 mb2 dib ttu tracked"><small>{reformatDate(frontmatter.date)}</small></time>
@@ -41,9 +41,9 @@ export default function BlogTemplate(props) {
 
 }
 
-BlogTemplate.getInitialProps = async function(ctx) {
+MediaTemplate.getInitialProps = async function(ctx) {
   const { slug } = ctx.query
-  const content = await import(`../../campaigns/${slug}.md`)
+  const content = await import(`../../posts/${slug}.md`)
   const config = await import(`../../data/config.json`)
   const data = matter(content.default);
   return {

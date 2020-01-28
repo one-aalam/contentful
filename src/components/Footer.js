@@ -74,7 +74,7 @@ const Footer = ({}) => (
                 </svg>
             </a>
             <a href="https://medium.com/" className="link dim dib mr3 black-70" title="Impossible Labs on Medium">
-                <svg class="db w2 h2" x="0px" y="0px" viewBox="0 0 290 248.6"
+                <svg className="db w2 h2" x="0px" y="0px" viewBox="0 0 290 248.6"
                 fill="currentColor" >
                 <g >
                     <path fill="currentColor" className="st0" d="M287.8,46.3L196,0.3c-0.4-0.2-0.9-0.3-1.3-0.3c0,0-0.1,0-0.1,0c-1.1,0-2.2,0.6-2.8,1.5l-56.6,92l63.2,102.7 l90.4-146.9C289.4,48.3,289,46.8,287.8,46.3z"
@@ -89,7 +89,7 @@ const Footer = ({}) => (
                 </svg>
             </a>
             <a href="https://www.linkedin.com/company/" className="link dim dib black-70">
-                <svg class="db w2 h2" x="0px" y="0px" viewBox="0 0 48 48" >
+                <svg className="db w2 h2" x="0px" y="0px" viewBox="0 0 48 48" >
                 <linearGradient gradientUnits="userSpaceOnUse" x1="23.9995"
                     y1="0" x2="23.9995" y2="48.0005" >
                     <stop offset="0" ></stop>
@@ -107,8 +107,8 @@ const Footer = ({}) => (
             </a>
             </div>
         </div>
-        <div class="db dn-ns">
-            <p class="f7 black-70 mt4 tc">
+        <div className="db dn-ns">
+            <p className="f7 black-70 mt4 tc">
             Copyright &copy; Your Company 2038
             </p>
         </div>

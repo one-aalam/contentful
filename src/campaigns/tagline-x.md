@@ -5,6 +5,7 @@ hero_image: /static/julia-joppien.jpg
 
 type: campaign
 title: 'This is a tagline. For x.'
+description: 'And we want you to be involved. This text needs to be longer for testing sake'
 useful: yes
 ---
 This will  **change things**. And we want you to be involved. This text needs to be longer for testing sake.
