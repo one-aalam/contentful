@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import ReactMarkdown from "react-markdown";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Layout from '../components/layout'
-import Nav from '../components/nav'
-import Meta from '../components/Meta';
 import { logEvent } from '../utils/analytics';
 import matter from 'gray-matter'
-import BlogList from '../components/BlogList';
-import MediaList, { MediaCard } from '../components/MediaList';
 import Banner from '../components/Banner';
-import News from '../components/News';
-import Promo from '../components/Promo';
+import MediaCard from '../components/MediaCard';
+import NewsCard from '../components/NewsCard';
+import PromoCard from '../components/PromoCard';
 
 let client;
 if (typeof window === undefined) {
@@ -25,7 +20,6 @@ const newsreelLinkClicked = () => {
   logEvent('Article', 'viewed', 'Newsreel')
 }
 
-
 const promoCardClicked = () => {
   logEvent('Promo', 'viewed', 'Homepage')
 }
@@ -38,17 +32,8 @@ const mediaCardClicked = () => {
   logEvent('Media', 'viewed', 'Homepage')
 }
 
-function truncateSummary(content) {
-  return content.slice(0, 200).trimEnd();
-}
-
-function reformatDate(fullDate) {
-  const date = new Date(fullDate)
-  return date.toDateString().slice(4);
-}
-
-const Home = ({ allBlogs }) =>  (
-  <Layout siteTitle={'Contentful -- Homepage'} description={'Yur at the HomePage of Contentful'}>
+const Home = ({ allBlogs, allCampaigns }) =>  (
+  <Layout siteTitle={'Analytics Times -- Homepage'} description={'Yur at the HomePage of Analytics Times'}>
     <div className='hero'>
 
       <div className="newsreel w-100 b--dashed bw-1 b--dark-green bg-yellow">
@@ -73,7 +58,7 @@ const Home = ({ allBlogs }) =>  (
                         href={{ pathname: `/blog/${post.slug}` }}
                       >
                       <a className="" onClick={newsCardClicked}>
-                        <News post={post} />
+                        <NewsCard post={post} />
                       </a>
                       </Link>
                     ))}
@@ -82,7 +67,7 @@ const Home = ({ allBlogs }) =>  (
               </div>
               <div className="fp-cell fp-cell--2">
                   <div className="fp-item">
-                      <Banner/>
+                      <Banner campaign={allCampaigns[0]} />
                   </div>
               </div>
               <div className="fp-cell fp-cell--3">
@@ -113,7 +98,7 @@ const Home = ({ allBlogs }) =>  (
                           href={{ pathname: `/blog/${post.slug}` }}
                         >
                         <a className="" onClick={promoCardClicked}>
-                          <Promo post={post}/>
+                          <PromoCard post={post}/>
                         </a>
                         </Link>
                       ))}
@@ -184,52 +169,50 @@ const Home = ({ allBlogs }) =>  (
         color: #333;
       }
 
+      .container {
+        border-top: 1px solid #DADCE0;
+        overflow-x: hidden;
+      }
 
+      .frontpage {
+        margin: 0 -17px 0 -16px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
 
-.container {
-  border-top: 1px solid #DADCE0;
-  overflow-x: hidden;
-}
+      .fp-cell {
+        padding: 16px;
+        background-color: #fff;
+        border-right: 1px solid #DADCE0;
+        border-bottom: 1px solid #DADCE0;
+      }
 
-.frontpage {
-  margin: 0 -17px 0 -16px;
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+        .fp-cell--1 {
+          grid-row: 1 / span 2;
+        }
 
-.fp-cell {
-  padding: 16px;
-  background-color: #fff;
-  border-right: 1px solid #DADCE0;
-  border-bottom: 1px solid #DADCE0;
-}
+        .fp-cell--2 {
+          grid-column: 2 / span 2;
+        }
 
-.fp-cell--1 {
-  grid-row: 1 / span 2;
-}
+        .fp-cell--3 {
+          grid-column: 2;
+        }
 
-.fp-cell--2 {
-  grid-column: 2 / span 2;
-}
+        .fp-item {
+          background-color: #efefef;
+          // display: flex;
+          // align-items: center;
+          // justify-content: center;
+          // min-height: 200px;
+          height: 100%;
+        }
 
-.fp-cell--3 {
-  grid-column: 2;
-}
-
-.fp-item {
-  background-color: #efefef;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // min-height: 200px;
-  height: 100%;
-}
-
-.fp-item--grid {
-  display: grid;
-  grid-template-columns: 1fr;
-}
+        .fp-item--grid {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
 
 
     `}</style>
@@ -260,8 +243,32 @@ Home.getInitialProps = async () => {
    return data;
  })(require.context("../posts", true, /\.md$/));
 
+ const campaigns = (context => {
+  const keys = context.keys();
+  const values = keys.map(context);
+  const data = keys.map((key, index) => {
+    // Create slug from filename
+    const slug = key
+      .replace(/^.*[\\\/]/, "")
+      .split(".")
+      .slice(0, -1)
+      .join(".");
+    const value = values[index];
+    // Parse yaml metadata & markdownbody in document
+    const document = matter(value.default);
+    return {
+      document,
+      slug
+    };
+  });
+  return data;
+})(require.context("../campaigns", true, /\.md$/));
+
+console.log(campaigns);
+
  return {
    allBlogs: posts,
+   allCampaigns: campaigns,
    ...siteConfig,
  }
 }

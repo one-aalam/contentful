@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
-import BlogList from '../components/BlogList';
+import NewsList from '../components/NewsList';
 import matter from 'gray-matter'
-const Blog = ( { allBlogs }) => (
+const News = ( { allBlogs }) => (
   <Layout>
-    <BlogList allBlogs={allBlogs}/>
+    <NewsList allBlogs={allBlogs}/>
   </Layout>
 )
 
-Blog.getInitialProps = async () => {
+News.getInitialProps = async () => {
   const siteConfig = await import(`../data/config.json`)
   const posts = (context => {
    const keys = context.keys();
@@ -35,4 +35,4 @@ Blog.getInitialProps = async () => {
 }
 
 
-export default Blog;
+export default News;

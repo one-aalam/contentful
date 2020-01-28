@@ -1,13 +1,13 @@
 import Layout from '../components/layout'
-import BlogList from '../components/BlogList';
+import PromoList from '../components/PromoList';
 import matter from 'gray-matter'
-const Blog = ( { allBlogs }) => (
+const Promo = ( { allBlogs }) => (
   <Layout>
-    <BlogList allBlogs={allBlogs}/>
+    <PromoList allBlogs={allBlogs}/>
   </Layout>
 )
 
-Blog.getInitialProps = async () => {
+Promo.getInitialProps = async () => {
   const siteConfig = await import(`../data/config.json`)
   const posts = (context => {
    const keys = context.keys();
@@ -35,4 +35,4 @@ Blog.getInitialProps = async () => {
 }
 
 
-export default Blog;
+export default Promo;

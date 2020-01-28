@@ -1,10 +1,7 @@
 import ReactMarkdown from "react-markdown";
+import {  truncateSummary } from '../utils/general';
 
-function truncateSummary(content) {
-    return content.slice(0, 200).trimEnd();
-}
-
-const News = ({ post }) => (
+const NewsCard = ({ post }) => (
     <article className="bt bb b--black-10 db pv4 ph3 ph0-l no-underline black dim">
     <div className="flex flex-column flex-row-ns">
       <div className="pr3-ns mb4 mb0-ns w-100 w-40-ns">
@@ -21,4 +18,4 @@ const News = ({ post }) => (
 </article>
 )
 
-export default News;
+export default NewsCard;

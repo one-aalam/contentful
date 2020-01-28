@@ -1,14 +1,14 @@
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import { logEvent } from '../utils/analytics';
-import MediaCard from './MediaCard';
-
+import { reformatDate, truncateSummary } from '../utils/general';
+import NewsCard from './NewsCard';
 
 const cardClick = () => {
-    logEvent('Media', 'viewed', 'MediaPage')
+    logEvent('News', 'viewed', 'NewsPage')
 }
 
-const MediaList = ({ allBlogs }) => {
-
+const NewsList = ({ allBlogs }) => {
   return (
     <>
       <div className="grid">
@@ -18,7 +18,7 @@ const MediaList = ({ allBlogs }) => {
             href={{ pathname: `/blog/${post.slug}` }}
           >
             <a className="" onClick={cardClick}>
-              <MediaCard post={post}/>
+                <NewsCard post={post} />
             </a>
           </Link>
         ))}
@@ -35,8 +35,8 @@ const MediaList = ({ allBlogs }) => {
           }
         `}
       </style>
-  </>
-)
+    </>
+  );
 };
 
-export default MediaList;
+export default NewsList;

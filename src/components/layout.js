@@ -1,7 +1,8 @@
 import React from 'react';
 import { initGA, logPageView, personaKey } from '../utils/analytics';
-import Nav from './nav';
 import Meta from './Meta';
+import Footer from './Footer';
+import Header from './Header';
 
 export default class Layout extends React.Component {
   componentDidMount () {
@@ -22,8 +23,9 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Meta siteTitle={this.props.siteTitle} description={this.props.description}/>
-        <Nav/>
+        <Header/>
         {this.props.children}
+        <Footer/>
       </div>
     )
   }

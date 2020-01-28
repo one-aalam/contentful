@@ -1,4 +1,4 @@
-const Promo = ({ post }) => (
+const PromoCard = ({ post }) => (
     <article className="bg-white center ba b--black-10">
         <div className="pv2 ph3">
             <h1 className="f6 ttu tracked">Daily News Co.</h1>
@@ -11,4 +11,4 @@ const Promo = ({ post }) => (
     </article>
 )
 
-export default Promo;
+export default PromoCard;

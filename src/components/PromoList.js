@@ -1,14 +1,12 @@
 import Link from "next/link";
+import PromoCard from './PromoCard';
 import { logEvent } from '../utils/analytics';
-import MediaCard from './MediaCard';
-
 
 const cardClick = () => {
-    logEvent('Media', 'viewed', 'MediaPage')
+    logEvent('Promo', 'viewed', 'PromoPage')
 }
 
-const MediaList = ({ allBlogs }) => {
-
+const PromoList = ({ allBlogs }) => {
   return (
     <>
       <div className="grid">
@@ -18,7 +16,7 @@ const MediaList = ({ allBlogs }) => {
             href={{ pathname: `/blog/${post.slug}` }}
           >
             <a className="" onClick={cardClick}>
-              <MediaCard post={post}/>
+                <PromoCard post={post} />
             </a>
           </Link>
         ))}
@@ -35,8 +33,8 @@ const MediaList = ({ allBlogs }) => {
           }
         `}
       </style>
-  </>
-)
+    </>
+  );
 };
 
-export default MediaList;
+export default PromoList;
