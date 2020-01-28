@@ -21,17 +21,18 @@ const BlogList = ({ allBlogs }) => {
 
   return (
     <>
-      <center>
+      {/* <center>
          <h1>Blog Roll</h1>
-        </center>
-      <div className="">
+        </center> */}
+      <div className="grid">
         {allBlogs.length > 1 && allBlogs.map(post => (
           <Link
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}
           >
             <a className="" onClick={cardClick}>
-                <article className="card br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center">
+                <article className="card br2 ba dark-gray b--black-10 center">
+                {/* w-100 w-50-m w-25-l */}
                     <img src={post.document.data.hero_image} alt={post.document.data.hero_image} className="db w-100 br2 br--top" />
                     <div className="pa2 ph3-ns pb3-ns">
                         <div className="dt w-100 mt1">
@@ -115,6 +116,14 @@ const BlogList = ({ allBlogs }) => {
             margin: 80px auto 40px;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+          }
+          .grid {
+            display: grid;
+            padding: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-row-gap: 1.2rem;
+            grid-column-gap: .8rem;
+            grid-auto-flow: row;
           }
           .card {
             // width: 300px;

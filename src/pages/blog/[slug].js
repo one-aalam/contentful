@@ -21,9 +21,7 @@ export default function BlogTemplate(props) {
   const frontmatter = props.data
 
   return (
-    <Layout siteTitle={props.siteTitle}>
-      <Meta siteTitle={'Contentful -- Blog'} description={'Yur at the Blog of Contentful'}/>
-      <Nav />
+    <Layout siteTitle={props.siteTitle} description={'Yur at the Blog of Contentful'}>
     <article className="blog" onClick={blogClick}>
         <figure className="blog__hero">
         <img

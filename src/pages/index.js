@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import ReactMarkdown from "react-markdown";
 import Layout from '../components/layout'
 import Nav from '../components/nav'
 import Meta from '../components/Meta';
 import { logEvent } from '../utils/analytics';
 import matter from 'gray-matter'
 import BlogList from '../components/BlogList';
+import MediaList, { MediaCard } from '../components/MediaList';
+import Banner from '../components/Banner';
+import News from '../components/News';
+import Promo from '../components/Promo';
 
 let client;
 if (typeof window === undefined) {
@@ -16,39 +21,108 @@ if (typeof window === undefined) {
   })
 }
 
-const cardClick = () => {
-  logEvent('Article', 'viewed', 'Campaign 1')
+const newsreelLinkClicked = () => {
+  logEvent('Article', 'viewed', 'Newsreel')
+}
+
+
+const promoCardClicked = () => {
+  logEvent('Promo', 'viewed', 'Homepage')
+}
+
+const newsCardClicked = () => {
+  logEvent('News', 'viewed', 'Homepage')
+}
+
+const mediaCardClicked = () => {
+  logEvent('Media', 'viewed', 'Homepage')
+}
+
+function truncateSummary(content) {
+  return content.slice(0, 200).trimEnd();
+}
+
+function reformatDate(fullDate) {
+  const date = new Date(fullDate)
+  return date.toDateString().slice(4);
 }
 
 const Home = ({ allBlogs }) =>  (
-  <Layout>
-    <Meta siteTitle={'Contentful -- Homepage'} description={'Yur at the HomePage of Contentful'}/>
-    <Nav />
+  <Layout siteTitle={'Contentful -- Homepage'} description={'Yur at the HomePage of Contentful'}>
     <div className='hero'>
-      <h1 className='title f1 w-100 dark-pink'>Welcome to Contentful</h1>
 
-      {/* <div className='row'>
-        <Link href='https://github.com/zeit/next.js#getting-started'>
-            <a className='card'  onClick={cardClick}>
-              <h3>Getting Started &rarr;</h3>
-              <p>Learn more about Next.js on GitHub and in their examples</p>
-            </a>
-        </Link>
-        <Link href='https://github.com/zeit/next.js/tree/master/examples'>
-          <a className='card'>
-            <h3>Examples &rarr;</h3>
-            <p>Find other example boilerplates on the Next.js GitHub</p>
-          </a>
-        </Link>
-        <Link href='https://github.com/zeit/next.js'>
-          <a className='card'>
-            <h3>Create Next App &rarr;</h3>
-            <p>Was this tool helpful? Let us know how we can improve it!</p>
-          </a>
-        </Link>
-      </div> */}
+      <div className="newsreel w-100 b--dashed bw-1 b--dark-green bg-yellow">
+          <marquee>{allBlogs.map(post => (
+            <Link
+              key={post.slug}
+              href={{ pathname: `/blog/${post.slug}` }}
+            >
+              <a className="" onClick={newsreelLinkClicked}><span className="f5 f4-ns mv0">{post.document.data.title} &rarr;&nbsp;&nbsp;</span></a></Link>))}
+          </marquee>
+      </div>
 
-      <BlogList allBlogs={allBlogs}/>
+      <div className="container">
+          <div className="frontpage">
+              <div className="fp-cell fp-cell--1">
+                  <div className="fp-item mw7 center avenir">
+
+                    {
+                    allBlogs.map(post => (
+                      <Link
+                        key={post.slug}
+                        href={{ pathname: `/blog/${post.slug}` }}
+                      >
+                      <a className="" onClick={newsCardClicked}>
+                        <News post={post} />
+                      </a>
+                      </Link>
+                    ))}
+
+                  </div>
+              </div>
+              <div className="fp-cell fp-cell--2">
+                  <div className="fp-item">
+                      <Banner/>
+                  </div>
+              </div>
+              <div className="fp-cell fp-cell--3">
+                  <div className="fp-item--grid">
+
+                      {
+                      allBlogs.map(post => (
+                        <Link
+                          key={post.slug}
+                          href={{ pathname: `/blog/${post.slug}` }}
+                        >
+                        <a className="" onClick={mediaCardClicked}>
+                          <MediaCard post={post} />
+                        </a>
+                        </Link>
+                      ))}
+
+                  </div>
+              </div>
+              <div className="fp-cell fp-cell--4">
+                <div>
+                <h1 className="f3 fw1 baskerville mt0 lh-title">Elsewhere on the web!</h1>
+                  <div className="promo-grid">
+                      {
+                      allBlogs.map(post => (
+                        <Link
+                          key={post.slug}
+                          href={{ pathname: `/blog/${post.slug}` }}
+                        >
+                        <a className="" onClick={promoCardClicked}>
+                          <Promo post={post}/>
+                        </a>
+                        </Link>
+                      ))}
+
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </div>
     </div>
 
     <style jsx>{`
@@ -67,7 +141,18 @@ const Home = ({ allBlogs }) =>  (
         text-align: center;
       }
 
+      .newsreel {
+        padding: 6px 4px;
+      }
 
+      .promo-grid {
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-row-gap: 1.2rem;
+        grid-column-gap: .8rem;
+        grid-auto-flow: row;
+      }
 
       .row {
         max-width: 880px;
@@ -98,6 +183,55 @@ const Home = ({ allBlogs }) =>  (
         font-size: 13px;
         color: #333;
       }
+
+
+
+.container {
+  border-top: 1px solid #DADCE0;
+  overflow-x: hidden;
+}
+
+.frontpage {
+  margin: 0 -17px 0 -16px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.fp-cell {
+  padding: 16px;
+  background-color: #fff;
+  border-right: 1px solid #DADCE0;
+  border-bottom: 1px solid #DADCE0;
+}
+
+.fp-cell--1 {
+  grid-row: 1 / span 2;
+}
+
+.fp-cell--2 {
+  grid-column: 2 / span 2;
+}
+
+.fp-cell--3 {
+  grid-column: 2;
+}
+
+.fp-item {
+  background-color: #efefef;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // min-height: 200px;
+  height: 100%;
+}
+
+.fp-item--grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+
     `}</style>
   </Layout>
 )
