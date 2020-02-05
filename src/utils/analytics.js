@@ -29,7 +29,15 @@ export const initGA = () => {
 export const logPageView = () => {
   const dimension1 = getUserPersona();
   console.log(`Logging pageview for ${window.location.pathname} and ${dimension1}`)
-  ReactGA.set({ dimension1 });
+  ReactGA.set({ dimension1 }); // persona
+  ReactGA.set({ dimension2: 'Admin' }); // target siteAdmin, siteClient
+  ReactGA.set({ dimension3: 'Lion' }); // firm firmLion, firmLeopard, firmPanther, firmFox, firmElephant
+  ReactGA.set({ dimension3: 'Leopard' }); // firm firmLion, firmLeopard, firmPanther, firmFox, firmElephant
+  ReactGA.set({ dimension3: 'Panther' }); // firm firmLion, firmLeopard, firmPanther, firmFox, firmElephant
+  ReactGA.set({ dimension4: 'Small' }); // role roleSmall, roleMedium, roleLarge, role4XL, role5XXL (allow multiple)
+  ReactGA.set({ dimension4: 'Large' }); // role roleSmall, roleMedium, roleLarge, role4XL, role5XXL (allow multiple)
+  ReactGA.set({ dimension5: 'DISPLAY' }); // license DISPLAY, RESTRICT, NONE
+  ReactGA.set({ dimension6: 'A' }); // group: A, B
   ReactGA.set({ page: window.location.pathname })
   ReactGA.pageview(window.location.pathname)
 }
